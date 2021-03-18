@@ -23,5 +23,6 @@ const App = () => {
   }
 }
 
-export default Config.LOAD_STORYBOOK === 'true' ? StorybookUI : App;
-
+console.error(Config.LOAD_STORYBOOK === 'true')
+// export default Config.LOAD_STORYBOOK === 'true' ? StorybookUI : App;
+export default StorybookUI;
