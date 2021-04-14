@@ -1,28 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+// @ts-ignore
 import StorybookUI from './storybook'
 import Config from 'react-native-config'
+import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
+const theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: 'tomato',
+        accent: 'yellow',
+    },
+};
+
 const App = () => {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+    const isLoadingComplete = useCachedResources();
+    const colorScheme = useColorScheme();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
-  }
-}
+    if (!isLoadingComplete) {
+        return null;
+    } else {
+        return (
+            <SafeAreaProvider>
+                <PaperProvider theme={theme}>
+                    <Navigation colorScheme={colorScheme}/>
+                    <StatusBar/>
+                </PaperProvider>
+            </SafeAreaProvider>
+        );
+    }
+};
 
-console.error(Config.LOAD_STORYBOOK === 'true')
 // export default Config.LOAD_STORYBOOK === 'true' ? StorybookUI : App;
-export default StorybookUI;
+export default App;
