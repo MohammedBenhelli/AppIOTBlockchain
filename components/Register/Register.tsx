@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, Button} from 'react-native-paper';
+import {TextInput, Button, Text} from 'react-native-paper';
 // @ts-ignore
 import styled from 'styled-components/native';
 import {FlatGrid} from "react-native-super-grid";
@@ -21,21 +21,15 @@ const Register = ({navigation}) => {
                 },
                 body: JSON.stringify(body)
             };
-            const res = await fetch('http://localhost:8000/api/users/register', options);
-            const resJSON = await res.json();
-            console.log(resJSON);
+            try {
+                const res = await fetch('http://localhost:8000/api/users/register', options);
+                const resJSON = await res.json();
+                console.log(resJSON);
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
-
-    const View = styled.View`
-      flex: 1;
-      width: 100%;
-      align-items: center;
-
-      .icon {
-        position: absolute;
-      }
-    `;
 
     const style = {
         emailInput: {
@@ -53,30 +47,30 @@ const Register = ({navigation}) => {
         }
     }
 
-    return (<View>
+    return (<>
             <TextInput
                 label="Email"
-                value={email}
+                defaultValue={email}
                 style={style.emailInput}
                 onChangeText={text => setEmail(text)}
             />
             <TextInput
                 label="Username"
-                value={username}
+                defaultValue={username}
                 style={style.input}
                 onChangeText={text => setUsername(text)}
             />
             <TextInput
                 secureTextEntry={true}
                 label="Password confirmation"
-                value={passwordVerif}
+                defaultValue={passwordVerif}
                 style={style.input}
                 onChangeText={password => setPasswordVerif(password)}
             />
             <TextInput
                 secureTextEntry={true}
                 label="Password"
-                value={password}
+                defaultValue={password}
                 style={style.input}
                 onChangeText={password => setPassword(password)}
             />
@@ -90,7 +84,7 @@ const Register = ({navigation}) => {
                                   onPress={() => submitForm()}>
                               Create
                           </Button>]} renderItem={({item}) => item}/>
-        </View>
+        </>
     );
 };
 

@@ -39,17 +39,17 @@ const Login = ({navigation}) => {
         }
     }
 
-    return (<View>
+    return (<>
             <TextInput
                 label="Email"
-                value={text}
+                defaultValue={text}
                 style={style.emailInput}
                 onChangeText={text => setText(text)}
             />
             <TextInput
                 secureTextEntry={true}
                 label="Password"
-                value={password}
+                defaultValue={password}
                 style={style.passwordInput}
                 onChangeText={password => setPassword(password)}
             />
@@ -63,7 +63,7 @@ const Login = ({navigation}) => {
                               Login
                           </Button>]} renderItem={({item}) => item}/>
 
-        </View>
+        </>
     );
 };
 
