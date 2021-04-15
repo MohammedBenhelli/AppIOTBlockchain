@@ -9,6 +9,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import Home from "../components/Home/Home";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -31,8 +32,8 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={Login}/>
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-        {/* @ts-ignore*/}
         <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name="Home" component={Home}/>
     </Stack.Navigator>
   );
 }

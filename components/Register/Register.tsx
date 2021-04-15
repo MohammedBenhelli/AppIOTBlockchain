@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {TextInput, Button, Text} from 'react-native-paper';
 // @ts-ignore
-import styled from 'styled-components/native';
 import {FlatGrid} from "react-native-super-grid";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 // @ts-ignore
 const Register = ({navigation}) => {
@@ -22,8 +23,10 @@ const Register = ({navigation}) => {
                 body: JSON.stringify(body)
             };
             try {
-                const res = await fetch('http://localhost:8000/api/users/register', options);
+                const res = await fetch('https://e3a33e2fcf77.ngrok.io/api/users/register', options);
                 const resJSON = await res.json();
+                await AsyncStorage.setItem('token', resJSON.csrfToken);
+                navigation.push('Home');
                 console.log(resJSON);
             } catch (e) {
                 console.log(e)
@@ -43,7 +46,8 @@ const Register = ({navigation}) => {
         registerBtn: {},
         loginBtn: {},
         grid: {
-            marginTop: '40%'
+            marginTop: '40%',
+            marginLeft: '3%'
         }
     }
 

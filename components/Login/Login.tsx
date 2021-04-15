@@ -1,27 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {TextInput, Button} from 'react-native-paper';
 import {FlatGrid} from 'react-native-super-grid';
 // @ts-ignore
-import styled from 'styled-components/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // @ts-ignore
 const Login = ({navigation}) => {
     const [text, setText] = useState('');
     const [password, setPassword] = useState('');
+    const [refresh] = useState(false)
+
+    useEffect(() => {
+        const isLogged = async () => {
+            try {
+                const token = await AsyncStorage.getItem('token');
+                if (token) {
+                    navigation.push('Home');
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        isLogged();
+    }, [refresh]);
 
     const submitForm = async () => {
 
     }
-
-    const View = styled.View`
-      flex: 1;
-      width: 100%;
-      align-items: center;
-
-      .icon {
-        position: absolute;
-      }
-    `;
 
     const style = {
         emailInput: {
@@ -35,7 +40,8 @@ const Login = ({navigation}) => {
         registerBtn: {},
         loginBtn: {},
         grid: {
-            marginTop: '40%'
+            marginTop: '40%',
+            marginLeft: '3%'
         }
     }
 
