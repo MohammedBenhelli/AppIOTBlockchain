@@ -2,10 +2,23 @@ import React from 'react';
 import {Appbar} from 'react-native-paper';
 import {StyleSheet, View, Text} from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 const Home = ({navigation}) => {
     const logOut = async () => {
         await AsyncStorage.removeItem('token');
+        Toast.show({
+            type: 'success',
+            position: 'top',
+            text1: 'Disconnected',
+            visibilityTime: 4000,
+            autoHide: true,
+            topOffset: 30,
+            bottomOffset: 40,
+            onShow: () => {},
+            onHide: () => {},
+            onPress: () => {}
+        });
         navigation.push('Root');
     };
 
@@ -33,7 +46,7 @@ const styles = StyleSheet.create({
         color: '#32a852',
         fontSize: 30,
         marginTop: '20%',
-        marginLeft: '25%'
+        textAlign: 'center',
     },
     bottom: {
         position: 'absolute',
