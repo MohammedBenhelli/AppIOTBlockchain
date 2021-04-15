@@ -12,7 +12,19 @@ const Register = ({navigation}) => {
     const [passwordVerif, setPasswordVerif] = useState('');
 
     const submitForm = async () => {
-        console.log('ici')
+        if (password.length > 7 && password === passwordVerif) {
+            const body = {username, email, password};
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            };
+            const res = await fetch('http://localhost:8000/api/users/register', options);
+            const resJSON = await res.json();
+            console.log(resJSON);
+        }
     }
 
     const View = styled.View`
