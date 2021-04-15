@@ -24,7 +24,7 @@ const Home = ({navigation}) => {
 
     return (<>
         <Text style={styles.connected}>Connected !</Text>
-        <Appbar style={styles.bottom}>
+        <Appbar dark={true} style={styles.bottom}>
             <Appbar.Action
                 icon="archive"
                 onPress={() => console.log('Pressed archive')}
