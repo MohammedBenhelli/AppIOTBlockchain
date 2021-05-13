@@ -43,7 +43,7 @@ const Login = ({navigation}) => {
                 body: JSON.stringify(body)
             };
             try {
-                const res = await fetch('https://e3a33e2fcf77.ngrok.io/api/users/login', options);
+                const res = await fetch('https://48022f6f49a1.ngrok.io/api/users/login', options);
                 const resJSON = await res.json();
                 console.log(resJSON.errors);
                 if (!resJSON.errors) {

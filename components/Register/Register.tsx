@@ -35,7 +35,7 @@ const Register = ({navigation}) => {
                 body: JSON.stringify(body)
             };
             try {
-                const res = await fetch('https://e3a33e2fcf77.ngrok.io/api/users/register', options);
+                const res = await fetch('https://48022f6f49a1.ngrok.io/api/users/register', options);
                 const resJSON = await res.json();
                 if (!resJSON.errors) {
                     await AsyncStorage.setItem('token', resJSON.csrfToken);
