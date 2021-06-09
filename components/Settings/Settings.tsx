@@ -3,14 +3,14 @@ import {StyleSheet, View, Text} from 'react-native';
 import {BottomNavigation} from "../../navigation/BottomNavigation";
 
 // @ts-ignore
-const Home = ({navigation}) => {
+const Settings = ({navigation}) => {
     return (<>
-        <Text style={styles.connected}>Home !</Text>
+        <Text style={styles.connected}>Settings !</Text>
         <BottomNavigation navigation={navigation}/>
     </>)
 };
 
-export default Home;
+export default Settings;
 
 const styles = StyleSheet.create({
     connected: {

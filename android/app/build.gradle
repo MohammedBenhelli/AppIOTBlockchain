@@ -4,3 +4,4 @@ android {
         missingDimensionStrategy 'react-native-camera', 'general' // <--- insert this line
     }
 }
+apply from: project(':react-native-config').projectDir.getPath() + '/dotenv.gradle'

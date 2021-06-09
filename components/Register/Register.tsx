@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {TextInput, Button, Text} from 'react-native-paper';
-// @ts-ignore
 import {FlatGrid} from "react-native-super-grid";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from "react-native-toast-message";
+import useAPI from "../../hooks/useAPI";
 
 
 // @ts-ignore
@@ -27,17 +27,11 @@ const Register = ({navigation}) => {
         setErrUsername(false);
         if (verifForm()) {
             const body = {username, email, password};
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            };
             try {
-                const res = await fetch('https://48022f6f49a1.ngrok.io/api/users/register', options);
-                const resJSON = await res.json();
+                const resJSON = await useAPI.request('users/register', 'POST', null, body);
+                // @ts-ignore
                 if (!resJSON.errors) {
+                    // @ts-ignore
                     await AsyncStorage.setItem('token', resJSON.csrfToken);
                     Toast.show({
                         type: 'success',
@@ -54,8 +48,19 @@ const Register = ({navigation}) => {
                     navigation.push('Home');
                 } else {
                     setErrRegister(true);
+                    Toast.show({
+                        type: 'error',
+                        position: 'top',
+                        text1: 'Error',
+                        visibilityTime: 4000,
+                        autoHide: true,
+                        topOffset: 30,
+                        bottomOffset: 40,
+                        onShow: () => {},
+                        onHide: () => {},
+                        onPress: () => {}
+                    });
                 }
-                console.log(resJSON);
             } catch (e) {
                 console.log(e)
             }

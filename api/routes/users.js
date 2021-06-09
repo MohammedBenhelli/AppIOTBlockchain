@@ -1,13 +1,16 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const Web3 = require('web3');
 
 const User = require('../models/user');
 const Session = require('../models/session');
 const { authenticate } = require('../middleware/authenticate');
 const { csrfCheck } = require('../middleware/csrfCheck');
 const { initSession, isEmail } = require('../utils/utils');
+const {getSecret} = require('../secrets');
 
 const router = express.Router();
+const web3 = new Web3('wss://rinkeby.infura.io/ws/v3/d7d94f83e4bb4895b63568ba2e30811b');
 
 router.post('/register', async (req, res) => {
   try {
@@ -21,7 +24,8 @@ router.post('/register', async (req, res) => {
     if (typeof username !== 'string') {
       throw new Error('Username must be string.');
     }
-    const user = new User({ email, password, username });
+    const {address, privateKey} = web3.eth.accounts.create([getSecret('salt')]);
+    const user = new User({ email, password, username, address, privateKey });
     const persistedUser = await user.save();
     const userId = persistedUser._id;
 
@@ -117,7 +121,7 @@ router.post('/login', async (req, res) => {
 router.get('/me', authenticate, async (req, res) => {
   try {
     const { userId } = req.session;
-    const user = await User.findById({ _id: userId }, { email: 1, _id: 0 });
+    const user = await User.findById({ _id: userId }, { email: 1, _id: 0, address: 1, username: 1 });
 
     res.json({
       title: 'Authentication successful',

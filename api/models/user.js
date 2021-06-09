@@ -20,6 +20,16 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 2,
     },
+    address: {
+        type: String,
+        required: true,
+        length: 42,
+    },
+    privateKey: {
+        type: String,
+        required: true,
+        length: 66,
+    },
 });
 
 UserSchema.plugin(uniqueValidator);

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {TextInput, Button, Text} from 'react-native-paper';
 import {FlatGrid} from 'react-native-super-grid';
-// @ts-ignore
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
+import useAPI from "../../hooks/useAPI";
 
 // @ts-ignore
 const Login = ({navigation}) => {
@@ -35,18 +35,11 @@ const Login = ({navigation}) => {
         setErrMail(false);
         if (verifForm()) {
             const body = {email, password};
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            };
             try {
-                const res = await fetch('https://48022f6f49a1.ngrok.io/api/users/login', options);
-                const resJSON = await res.json();
-                console.log(resJSON.errors);
+                const resJSON = await useAPI.request('users/login', 'POST', null, body);
+                // @ts-ignore
                 if (!resJSON.errors) {
+                    // @ts-ignore
                     await AsyncStorage.setItem('token', resJSON.csrfToken);
                     Toast.show({
                         type: 'success',
@@ -63,6 +56,18 @@ const Login = ({navigation}) => {
                     navigation.push('Home');
                 } else {
                     setErrLogin(true);
+                    Toast.show({
+                        type: 'error',
+                        position: 'top',
+                        text1: 'Error',
+                        visibilityTime: 4000,
+                        autoHide: true,
+                        topOffset: 30,
+                        bottomOffset: 40,
+                        onShow: () => {},
+                        onHide: () => {},
+                        onPress: () => {}
+                    });
                 }
             } catch (e) {
                 console.log(e)

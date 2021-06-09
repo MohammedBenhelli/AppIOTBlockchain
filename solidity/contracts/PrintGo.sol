@@ -36,6 +36,7 @@ contract PrintGo is ERC721 {
         require(!isBanned(_printer), "Banned");
         uint256 tokenId = _tokenIds.current();
         Sale memory token = Sale(_printer, _buyer, _price);
+        _tokenIds.increment();
         sales[tokenId] = token;
         _mint(msg.sender, tokenId);
         return tokenId;
