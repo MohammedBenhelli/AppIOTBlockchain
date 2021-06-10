@@ -4,13 +4,11 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 // @ts-ignore
 import StorybookUI from './storybook'
-import Config from 'react-native-config'
-import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import Toast from 'react-native-toast-message';
-import useAPI from "./hooks/useAPI";
 
 const theme = {
     ...DefaultTheme,
@@ -32,7 +30,7 @@ const App = () => {
                 <PaperProvider theme={theme}>
                     <Navigation colorScheme={colorScheme}/>
                     <StatusBar/>
-                    <Toast ref={(ref) => Toast.setRef(ref)} />
+                    <Toast ref={(ref) => Toast.setRef(ref)}/>
                 </PaperProvider>
             </SafeAreaProvider>
         );

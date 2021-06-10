@@ -1,6 +1,6 @@
 const express = require('express');
 const Axios = require('axios');
-const { authenticate } = require('../middleware/authenticate');
+const {authenticate} = require('../middleware/authenticate');
 
 const router = express.Router();
 

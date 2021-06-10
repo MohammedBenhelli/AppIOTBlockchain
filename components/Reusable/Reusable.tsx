@@ -14,6 +14,6 @@ export const Loader = () => {
     });
 
     return (
-        <ProgressBar progress={progress / 10} />
+        <ProgressBar progress={progress / 10}/>
     )
 }

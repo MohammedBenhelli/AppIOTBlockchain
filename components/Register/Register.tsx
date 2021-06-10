@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, Button, Text} from 'react-native-paper';
+import {Button, Text, TextInput} from 'react-native-paper';
 import {FlatGrid} from "react-native-super-grid";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from "react-native-toast-message";
@@ -28,7 +28,7 @@ const Register = ({navigation}) => {
         if (verifForm()) {
             const body = {username, email, password};
             try {
-                const resJSON = await useAPI.request('users/register', 'POST', null, body);
+                const resJSON = await useAPI.requestBackend('users/register', 'POST', null, body);
                 // @ts-ignore
                 if (!resJSON.errors) {
                     // @ts-ignore
@@ -41,9 +41,12 @@ const Register = ({navigation}) => {
                         autoHide: true,
                         topOffset: 30,
                         bottomOffset: 40,
-                        onShow: () => {},
-                        onHide: () => {},
-                        onPress: () => {}
+                        onShow: () => {
+                        },
+                        onHide: () => {
+                        },
+                        onPress: () => {
+                        }
                     });
                     navigation.push('Home');
                 } else {
@@ -56,9 +59,12 @@ const Register = ({navigation}) => {
                         autoHide: true,
                         topOffset: 30,
                         bottomOffset: 40,
-                        onShow: () => {},
-                        onHide: () => {},
-                        onPress: () => {}
+                        onShow: () => {
+                        },
+                        onHide: () => {
+                        },
+                        onPress: () => {
+                        }
                     });
                 }
             } catch (e) {

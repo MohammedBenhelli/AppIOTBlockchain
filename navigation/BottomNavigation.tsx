@@ -16,9 +16,12 @@ export const BottomNavigation = ({navigation}) => {
             autoHide: true,
             topOffset: 30,
             bottomOffset: 40,
-            onShow: () => {},
-            onHide: () => {},
-            onPress: () => {}
+            onShow: () => {
+            },
+            onHide: () => {
+            },
+            onPress: () => {
+            }
         });
         navigation.push('Root');
     };
@@ -35,10 +38,10 @@ export const BottomNavigation = ({navigation}) => {
 
 const styles = StyleSheet.create({
     bottom: {
-        flex:1,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         position: 'absolute',
         left: 0,
         right: 0,

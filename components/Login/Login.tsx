@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {TextInput, Button, Text} from 'react-native-paper';
+import React, {useEffect, useState} from 'react';
+import {Button, Text, TextInput} from 'react-native-paper';
 import {FlatGrid} from 'react-native-super-grid';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
         if (verifForm()) {
             const body = {email, password};
             try {
-                const resJSON = await useAPI.request('users/login', 'POST', null, body);
+                const resJSON = await useAPI.requestBackend('users/login', 'POST', null, body);
                 // @ts-ignore
                 if (!resJSON.errors) {
                     // @ts-ignore
@@ -49,9 +49,12 @@ const Login = ({navigation}) => {
                         autoHide: true,
                         topOffset: 30,
                         bottomOffset: 40,
-                        onShow: () => {},
-                        onHide: () => {},
-                        onPress: () => {}
+                        onShow: () => {
+                        },
+                        onHide: () => {
+                        },
+                        onPress: () => {
+                        }
                     });
                     navigation.push('Home');
                 } else {
@@ -64,9 +67,12 @@ const Login = ({navigation}) => {
                         autoHide: true,
                         topOffset: 30,
                         bottomOffset: 40,
-                        onShow: () => {},
-                        onHide: () => {},
-                        onPress: () => {}
+                        onShow: () => {
+                        },
+                        onHide: () => {
+                        },
+                        onPress: () => {
+                        }
                     });
                 }
             } catch (e) {
@@ -75,7 +81,8 @@ const Login = ({navigation}) => {
         } else {
             if (password.length < 8) {
                 setErrPass(true);
-            } if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            }
+            if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
                 setErrMail(true);
             }
         }

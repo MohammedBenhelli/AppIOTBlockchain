@@ -1,4 +1,4 @@
-import { storiesOf } from '@storybook/react-native';
+import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import Register from '../../../components/Register/Register';
 import CenterView from '../CenterView';

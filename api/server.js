@@ -4,16 +4,16 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
-const { getSecret } = require('./secrets');
+const {getSecret} = require('./secrets');
 const usersRoute = require('./routes/users');
 const thingiverseRoute = require('./routes/thingiverse');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(getSecret('dbUri')).then(
-  () => {
-    console.log('Connected to mongoDB');
-  },
-  (err) => console.log('Error connecting to mongoDB', err)
+    () => {
+        console.log('Connected to mongoDB');
+    },
+    (err) => console.log('Error connecting to mongoDB', err)
 );
 
 const app = express();
@@ -26,7 +26,7 @@ app.use('/api/users', usersRoute);
 // app.use('/api/thingiverse', thingiverseRoute);
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
-module.exports = { app };
+module.exports = {app};

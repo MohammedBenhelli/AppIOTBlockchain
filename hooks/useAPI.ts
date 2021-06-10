@@ -1,7 +1,8 @@
-import Config from 'react-native-config'
+import Config from 'react-native-config';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default class useAPI {
-    static async request(url: string, method: string = 'GET',token: any = null, body: any = null) {
+    static async requestBackend(url: string, method: string = 'GET', token: any = null, body: any = null) {
         const options = {
             method: method,
             headers: {
@@ -9,7 +10,20 @@ export default class useAPI {
             },
         };
         if (body) options.body = JSON.stringify(body);
-        const res = await fetch(`${Config.API_URL || 'https://bddded9aeb4c.ngrok.io' }/api/${url}`, options);
+        const res = await fetch(`${Config.API_URL || 'https://38d98f1a0c17.ngrok.io'}/api/${url}`, options);
+        return await res.json();
+    }
+
+    static async requestPrinter(url: string, method: string = 'GET', token: any = null, body: any = null) {
+        const ip = await AsyncStorage.getItem('ip');
+        const options = {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        if (body) options.body = JSON.stringify(body);
+        const res = await fetch(`${ip}${url}`, options);
         return await res.json();
     }
 }

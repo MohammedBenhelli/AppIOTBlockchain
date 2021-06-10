@@ -1,4 +1,4 @@
-import { storiesOf } from '@storybook/react-native';
+import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import Login from '../../../components/Login/Login';
 import CenterView from '../CenterView';
