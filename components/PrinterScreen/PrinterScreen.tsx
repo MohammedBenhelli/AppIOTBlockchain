@@ -67,11 +67,7 @@ const SdViewer = () => {
     </>)
 }
 
-const TemperatureChart = ({temperature
-                          }
-                              :
-                              any
-) => {
+const TemperatureChart = ({temperature}: any) => {
     const screenWidth = Dimensions.get("window").width;
     const chartConfig = {
         backgroundColor: "#F2F2F2",
