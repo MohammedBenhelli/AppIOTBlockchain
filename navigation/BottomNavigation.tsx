@@ -8,6 +8,7 @@ import {StyleSheet} from "react-native";
 export const BottomNavigation = ({navigation}) => {
     const logOut = async () => {
         await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('ip');
         Toast.show({
             type: 'success',
             position: 'top',

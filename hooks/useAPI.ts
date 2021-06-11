@@ -10,11 +10,11 @@ export default class useAPI {
             },
         };
         if (body) options.body = JSON.stringify(body);
-        const res = await fetch(`${Config.API_URL || 'https://38d98f1a0c17.ngrok.io'}/api/${url}`, options);
+        const res = await fetch(`${Config.API_URL || 'https://2fd920ecc7d8.ngrok.io'}/api/${url}`, options);
         return await res.json();
     }
 
-    static async requestPrinter(url: string, method: string = 'GET', token: any = null, body: any = null) {
+    static async requestPrinter(url: string, method: string = 'GET', token: any = null, body: any = null, json: boolean = true) {
         const ip = await AsyncStorage.getItem('ip');
         const options = {
             method: method,
@@ -23,8 +23,9 @@ export default class useAPI {
             },
         };
         if (body) options.body = JSON.stringify(body);
-        const res = await fetch(`${ip}${url}`, options);
-        return await res.json();
+        const res = await fetch(`${ip || ''}${url}`, options);
+        if (json) return await res.json();
+        return res;
     }
 }
 ;
