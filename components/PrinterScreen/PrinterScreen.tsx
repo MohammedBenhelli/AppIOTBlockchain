@@ -93,6 +93,7 @@ const File = ({file, key}: any) => {
             'print': true
         };
         const res = await useAPI.requestPrinter(`/api/files/local/${file.path}`, 'POST', '', body);
+        await useAPI.requestBackend('/logs/print', 'POST', await AsyncStorage.getItem('token'), {message: file.path})
         if (!res.error) {
             Toast.show({
                 type: 'success',

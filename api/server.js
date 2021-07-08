@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const {getSecret} = require('./secrets');
 const usersRoute = require('./routes/users');
-const thingiverseRoute = require('./routes/thingiverse');
+const logsRoute = require('./routes/logs');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(getSecret('dbUri')).then(
@@ -19,11 +19,13 @@ mongoose.connect(getSecret('dbUri')).then(
 const app = express();
 const port = process.env.PORT || 8000;
 
+app.set('trust proxy', true);
+
 app.use('/search', proxy('www.thingiverse.com'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use('/api/users', usersRoute);
-// app.use('/api/thingiverse', thingiverseRoute);
+app.use('/api/logs', logsRoute);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
